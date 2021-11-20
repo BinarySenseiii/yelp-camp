@@ -11,35 +11,39 @@ const Home = () => {
             <Head>
                 <title>Yelpcamp - Home</title>
             </Head>
-            <div className="grid grid-cols-2 min-h-screen w-full">
-                <div className="px-10">
-                    <Image
-                        src="/assets/Logo.svg"
-                        alt="logo not found"
-                        height={150}
-                        width={150}
-                    />
+            <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen w-full">
+                <div className="px-10 min-h-screen flex flex-col md:justify-center lg:items-start items-center text-center lg:text-left">
+                    <div className="md:mt-0">
+                        <Image
+                            src="/assets/Logo.svg"
+                            alt="logo not found"
+                            height={150}
+                            width={150}
+                        />
+                    </div>
                     <div className="relative -mt-8">
-                        <h1 className="text-6xl font-bold text-gray-800">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800">
                             Explore the best <br /> camps on Earth.
                         </h1>
-                        <p className="mt-5 text-2xl text-primary">
+                        <p className="mt-5 text-md md:text-2xl text-primary">
                             YelpCamp is a curated list of the best camping spots
-                            on <br /> Earth. Unfiltered and unbiased reviews.
+                            on Earth. Unfiltered and unbiased reviews.
                         </p>
-                        <ul className="mt-5">
+                        <ul className="mt-5 w-full mx-auto">
                             {suggestions.map(({ id, text }) => (
                                 <li
                                     key={id}
-                                    className="text-xl font-headings text-black flex items-center mb-2"
+                                    className="text-xl font-headings text-black flex w-96 mx-auto lg:w-full items-start md:items-center mb-2"
                                 >
-                                    <Image
-                                        src="/assets/Checkmark.svg"
-                                        alt="logo not found"
-                                        height={20}
-                                        width={20}
-                                    />
-                                    <span className="ml-4">{text}</span>
+                                    <div>
+                                        <Image
+                                            src="/assets/Checkmark.svg"
+                                            alt="logo not found"
+                                            height={20}
+                                            width={20}
+                                        />
+                                        <span className="ml-4">{text}</span>
+                                    </div>
                                 </li>
                             ))}
                         </ul>
@@ -74,7 +78,7 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className="relative max-h-screen w-full">
+                <div className="relative hidden lg:block max-h-screen w-full">
                     <Image
                         src="/assets/hero-image.jpg"
                         alt="hero-img not found"
