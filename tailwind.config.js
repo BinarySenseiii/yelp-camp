@@ -1,9 +1,14 @@
 module.exports = {
   mode: 'jit',
+  darkMode: 'class',
   purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-  darkMode: false, // or 'media' or 'class'
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        'headings': ['Poppins', 'sans-serif'],
+        'body': ['Lato', 'sans-serif'],
+       }
+    },
   },
   variants: {
     extend: {},
