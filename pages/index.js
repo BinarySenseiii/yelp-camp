@@ -1,11 +1,25 @@
 import React from 'react'
 import Head from 'next/head'
 import Image from 'next/image'
+import { buildUrl } from 'cloudinary-build-url'
 
 import { suggestions } from '../data'
 import { Button } from '../components'
 
 const Home = () => {
+   const src = buildUrl('hero-image_zgzlhv', {
+      cloud: {
+         cloudName: 'deweqyyjt',
+      },
+      transformations: {
+         resize: {
+            effect: 'blur:1000',
+            quality: 1,
+         },
+      },
+   })
+
+   console.log(src)
    return (
       <React.Fragment>
          <Head>
@@ -87,11 +101,14 @@ const Home = () => {
             </div>
             <div className="relative hidden lg:block max-h-screen w-full">
                <Image
-                  src="/assets/hero-image.jpg"
+                  src={src}
+                  placeholder="blur"
+                  blurDataURL={src}
                   alt="hero-img not found"
                   layout="fill"
                   objectFit="cover"
                   objectPosition="bottom"
+                  priority
                />
             </div>
          </div>

@@ -1,7 +1,8 @@
 import React from 'react'
+import { Navbar } from '../../components'
 
 const CampGround = () => {
-   return <div>Camp Ground</div>
+   return <Navbar />
 }
 
 export default CampGround
