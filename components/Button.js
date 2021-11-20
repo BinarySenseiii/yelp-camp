@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 const Button = ({ text, path }) => {
    return (
       <Link href={path} passHref>
-         <a className="bg-black py-4 px-5 hover:bg-gray-800 transition text-white rounded-md cursor-pointer">
+         <a className="bg-black font-headings py-4 px-5 hover:bg-gray-800 transition text-white rounded-md cursor-pointer">
             {text}
          </a>
       </Link>

@@ -3,12 +3,13 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import Sidebar from './Sidebar'
+import Button from './Button'
 
 const Navbar = () => {
    const [isOpen, setIsOpen] = React.useState(false)
 
    return (
-      <nav className="flex h-16 relative px-8 items-center justify-between container mx-auto">
+      <nav className="flex h-[100px] relative items-center justify-between container mx-auto">
          <div className="flex items-center">
             <Image
                src="/assets/Logo.svg"
@@ -46,17 +47,21 @@ const Navbar = () => {
          <div className="hidden md:flex items-center space-x-7">
             <Link href="/">
                <a className="cursor-pointer ml-6 text-lg font-medium text-gray-500 hover:text-gray-900 font-headings">
-                  Johndoe
+                  Login
                </a>
             </Link>
-            <Link href="/">
-               <a className="cursor-pointer ml-6 text-lg font-light text-gray-500 hover:text-gray-900 font-headings">
-                  Logout
-               </a>
-            </Link>
+            <Button text="Create an account" path="/signUp" />
          </div>
       </nav>
    )
 }
 
 export default Navbar
+
+// {
+//    /* <Link href="/">
+//       <a className="cursor-pointer ml-6 text-lg font-light text-gray-500 hover:text-gray-900 font-headings">
+//           Logout
+//         </a>
+//     </Link> */
+// }
