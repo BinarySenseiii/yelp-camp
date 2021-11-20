@@ -58,7 +58,7 @@ const Home = () => {
                      ))}
                   </ul>
                   <div className="mt-8">
-                     <Button text="View Campgrounds" path="/camp-ground" />
+                     <Button text="View Campgrounds" path="/campground" />
                   </div>
                   <div className="mt-9 font-medium">
                      <h4>Partnered With</h4>
