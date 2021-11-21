@@ -5,7 +5,7 @@ const NewCampPage = () => {
    return (
       <div className="container mx-auto px-8">
          <Navbar />
-         <div className="w-full md:flex justify-center">
+         <div className="w-full md:w-[568px] mx-auto">
             <form className="my-5">
                <h1 className="font-bold text-2xl md:text-3xl">
                   Add New Campground
