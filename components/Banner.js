@@ -14,7 +14,7 @@ const Banner = () => {
                or add your own.
             </p>
             <Search />
-            <Link href="/newCamp">
+            <Link href="/add">
                <a className="underline font-headings mt-3 block text-[#464646cc] hover:text-gray-500 hover:no-underline">
                   Or add your own Campground
                </a>
