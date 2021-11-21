@@ -25,7 +25,7 @@ const LoginPage = () => {
 
             <Login />
          </div>
-         <div className="h-[400px] mt-8 md:mt-0 md:min-h-screen w-full bg-[#F7EFEF] flex items-center justify-start px-10 md:px-20">
+         <div className="min-h-[400px] py-16 mt-8 md:mt-0 md:min-h-screen w-full bg-[#F7EFEF] flex items-center justify-start px-10 md:px-20">
             <div>
                <h1 className="font-[500] text-lg xl:text-xl text-gray-800">
                   <blockquote>

@@ -50,7 +50,7 @@ const Navbar = () => {
                   Login
                </a>
             </Link>
-            <Button text="Create an account" path="/signUp" />
+            <Button text="Create an account" path="/signup" />
          </div>
       </nav>
    )
