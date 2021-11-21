@@ -5,8 +5,10 @@ import PropTypes from 'prop-types'
 const Sidebar = ({ isOpen }) => {
    return (
       <div
-         className={`flex md:hidden flex-col transition-all duration-150 ease-in-out bg-gray-100 w-full border-b-2 z-50 border-gray-500 shadow-md absolute min-h-[300px] top-full justify-center py-12 items-center space-y-7 ${
-            isOpen ? 'right-0' : '-right-[120%]'
+         className={`flex md:hidden flex-col transition-all duration-250 ease-in-out bg-gray-100 w-48 border-b-2 z-50 border-t-2 border-gray-500 right-0 shadow-lg absolute min-h-[200px] top-full justify-center py-12 items-center space-y-7 ${
+            isOpen
+               ? 'opacity-100 pointer-events-auto'
+               : 'opacity-0 pointer-events-none'
          }`}
       >
          <Link href="/">

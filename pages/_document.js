@@ -17,7 +17,7 @@ class MyDocument extends Document {
                />
                <link rel="icon" type="image/png" href="/assets/yelp.png" />
             </Head>
-            <body className="overflow-x-hidden">
+            <body>
                <Main />
                <NextScript />
             </body>
