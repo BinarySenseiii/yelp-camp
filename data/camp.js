@@ -53,3 +53,24 @@ export const posts = [
       text: 'This is one of the best beach camping sites, beautiful and pristine.',
    },
 ]
+
+export const comments = [
+   {
+      id: uuid(),
+      name: 'Adam jones',
+      timeStamp: '12h ago',
+      text: 'Honestly one of the best experiences ever, took us a while to figure out how to get there but it was amazing!',
+   },
+   {
+      id: uuid(),
+      name: 'Isaac Dylan',
+      timeStamp: '1 day ago',
+      text: 'Traveling Changesyou as a person, you gain more perspective, this is the perfect spot to do that',
+   },
+   {
+      id: uuid(),
+      name: 'hudsan Luca',
+      timeStamp: '3 days ago',
+      text: 'Definitely recommend going therem not too far and not a lot of people to ruin the experience',
+   },
+]

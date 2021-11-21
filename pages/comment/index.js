@@ -23,7 +23,7 @@ const Comment = () => {
                   type="submit"
                   className="bg-black w-full mt-6 font-headings py-3 px-5 hover:bg-gray-800 transition text-white rounded-md cursor-pointer"
                >
-                  Add Campground
+                  Comment
                </button>
             </form>
          </div>

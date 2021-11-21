@@ -1,3 +1,3 @@
-import { suggestions, posts } from './camp'
+import { suggestions, posts, comments } from './camp'
 
-export { suggestions, posts }
+export { suggestions, posts, comments }
