@@ -1,6 +1,10 @@
 import React from 'react'
 import Router from 'next/router'
+
 import ProgressBar from '@badrap/bar-of-progress'
+import { QueryClient, QueryClientProvider } from 'react-query'
+import { ReactQueryDevtools } from 'react-query/devtools'
+import UserProvider from '../context/UserContext'
 
 import '../styles/global.css'
 
@@ -13,6 +17,8 @@ const progress = new ProgressBar({
 
 // eslint-disable-next-line react/prop-types
 function MyApp({ Component, pageProps }) {
+   const queryClient = new QueryClient()
+
    React.useEffect(() => {
       Router.events.on('routeChangeStart', progress.start)
       Router.events.on('routeChangeComplete', progress.finish)
@@ -23,9 +29,12 @@ function MyApp({ Component, pageProps }) {
    }, [])
 
    return (
-      <div>
-         <Component {...pageProps} />
-      </div>
+      <UserProvider>
+         <QueryClientProvider client={queryClient}>
+            <Component {...pageProps} />
+            <ReactQueryDevtools initialIsOpen={false} />
+         </QueryClientProvider>
+      </UserProvider>
    )
 }
 

@@ -9,14 +9,14 @@ const SignUp = () => {
          </h1>
          <form className="mt-10">
             <div className="flex flex-col font-headings">
-               <label htmlFor="username" className="text-lg text-gray-700">
-                  Username
+               <label htmlFor="email" className="text-lg text-gray-700">
+                  Email
                </label>
                <input
                   className="mt-2 w-full px-4 h-[50px] bg-gray-200"
-                  id="username"
+                  id="email"
                   type="text"
-                  placeholder="johndoe_91"
+                  placeholder="test@test.com"
                />
             </div>
             <div className="flex flex-col font-headings mt-6">
