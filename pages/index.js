@@ -78,7 +78,7 @@ const Home = () => {
                      <h4>Partnered With</h4>
                      <div className="-mt-8 -ml-6">
                         <Image
-                           src="/assets/airbnb.svg"
+                           src="/assets/airbn.svg"
                            alt="airbnb not found"
                            height={120}
                            width={120}
