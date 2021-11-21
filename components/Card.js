@@ -12,6 +12,8 @@ const Card = ({ id, title, url, text }) => {
                alt={`${title} not found`}
                layout="fill"
                objectFit="cover"
+               placeholder="blur"
+               blurDataURL={url}
             />
          </div>
          <h1 className="text-xl font-bold mt-5 ">{title}</h1>

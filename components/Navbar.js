@@ -27,7 +27,7 @@ const Navbar = () => {
             className="cursor-pointer block md:hidden"
             onClick={() => setIsOpen((old) => !old)}
          >
-            {isOpen ? (
+            {!isOpen ? (
                <Image
                   src="/assets/Hamburger Menu.svg"
                   alt="logo not found"
@@ -45,7 +45,7 @@ const Navbar = () => {
          </div>
          <Sidebar isOpen={isOpen} />
          <div className="hidden md:flex items-center space-x-7">
-            <Link href="/">
+            <Link href="/login">
                <a className="cursor-pointer ml-6 text-lg font-medium text-gray-500 hover:text-gray-900 font-headings">
                   Login
                </a>

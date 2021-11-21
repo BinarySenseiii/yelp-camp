@@ -79,7 +79,7 @@ const Home = () => {
                      <div className="-mt-8 -ml-6">
                         <Image
                            src="/assets/airbnb.svg"
-                           alt="booking not found"
+                           alt="airbnb not found"
                            height={120}
                            width={120}
                         />
@@ -91,7 +91,7 @@ const Home = () => {
                         />
                         <Image
                            src="/assets/plum-guide.svg"
-                           alt="booking not found"
+                           alt="plum not found"
                            height={120}
                            width={120}
                         />

@@ -6,7 +6,7 @@ const Sidebar = ({ isOpen }) => {
    return (
       <div
          className={`flex md:hidden flex-col transition-all duration-150 ease-in-out bg-gray-100 w-full border-b-2 z-50 border-gray-500 shadow-md absolute min-h-[300px] top-full justify-center py-12 items-center space-y-7 ${
-            !isOpen ? 'right-0' : '-right-[120%]'
+            isOpen ? 'right-0' : '-right-[120%]'
          }`}
       >
          <Link href="/">
