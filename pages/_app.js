@@ -6,6 +6,9 @@ import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
 import UserProvider from '../context/UserContext'
 
+// toast
+import { Toaster } from 'react-hot-toast'
+
 import '../styles/global.css'
 
 const progress = new ProgressBar({
@@ -32,6 +35,7 @@ function MyApp({ Component, pageProps }) {
       <UserProvider>
          <QueryClientProvider client={queryClient}>
             <Component {...pageProps} />
+            <Toaster />
             <ReactQueryDevtools initialIsOpen={false} />
          </QueryClientProvider>
       </UserProvider>

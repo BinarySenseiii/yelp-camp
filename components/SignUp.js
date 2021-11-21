@@ -1,13 +1,65 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
+import { uuid } from '../helpers'
+import Router from 'next/router'
+
+// firebase
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { doc, setDoc } from 'firebase/firestore'
+import { auth, db } from '../firebase/config'
 
 const SignUp = () => {
+   const [input, setInput] = useState({
+      email: '',
+      password: '',
+   })
+
+   const onChangeHander = (e) => {
+      setInput((oldValues) => ({
+         ...oldValues,
+         [e.target.name]: e.target.value,
+      }))
+   }
+
+   const signUpHandler = async (event) => {
+      event.preventDefault()
+      const { email, password } = input
+
+      if (!email || !password) {
+         toast.error('input fields required')
+         return
+      }
+
+      try {
+         const userCrediential = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+         )
+
+         if (userCrediential) {
+            const campRef = await doc(db, 'camps', userCrediential.user.uid)
+            await setDoc(campRef, {
+               id: uuid(),
+               name: '',
+               text: '',
+               image: '',
+               timeStamp: userCrediential.user.metadata.creationTime,
+            })
+            Router.replace('/campground')
+         }
+      } catch (err) {
+         toast.error(err.message)
+      }
+   }
+
    return (
       <div className="mt-14">
          <h1 className="text-2xl md:text-3xl font-[600]">
             Start Exploring camps from all <br /> around the world.
          </h1>
-         <form className="mt-10">
+         <form className="mt-10" onSubmit={signUpHandler}>
             <div className="flex flex-col font-headings">
                <label htmlFor="email" className="text-lg text-gray-700">
                   Email
@@ -15,8 +67,10 @@ const SignUp = () => {
                <input
                   className="mt-2 w-full px-4 h-[50px] bg-gray-200"
                   id="email"
+                  name="email"
                   type="text"
                   placeholder="test@test.com"
+                  onChange={onChangeHander}
                />
             </div>
             <div className="flex flex-col font-headings mt-6">
@@ -27,7 +81,9 @@ const SignUp = () => {
                   className="mt-2 w-full px-4 h-[50px] bg-gray-200"
                   id="pass"
                   type="text"
+                  name="password"
                   placeholder="Enter your Password"
+                  onChange={onChangeHander}
                />
             </div>
             <button
