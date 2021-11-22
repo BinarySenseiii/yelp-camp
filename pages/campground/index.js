@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState, memo } from 'react'
+import Head from 'next/head'
 import { Navbar, Banner, Posts, Spinner } from '../../components'
 import { useAuthContext } from '../../context/UserContext'
 
@@ -7,6 +8,8 @@ import { collection, query } from 'firebase/firestore'
 import { useFirestoreQuery } from '@react-query-firebase/firestore'
 
 const CampGround = () => {
+   const [searchText, setSearchtext] = useState(null)
+
    const { isAuthReady } = useAuthContext()
    const ref = query(collection(db, 'camps'))
    const { isLoading, data } = useFirestoreQuery(['camps'], ref)
@@ -17,18 +20,21 @@ const CampGround = () => {
 
    const snapshot = data
 
-   const campData = snapshot.docs.map((document) => ({
+   const results = snapshot.docs.map((document) => ({
       id: document.id,
       ...document.data(),
    }))
 
    return (
       <div className="container mx-auto px-8">
+         <Head>
+            <title>Yelp Camp</title>
+         </Head>
          <Navbar />
-         <Banner />
-         <Posts camps={campData} />
+         <Banner camps={results} setSearchtext={setSearchtext} />
+         <Posts camps={results} searchText={searchText} />
       </div>
    )
 }
 
-export default CampGround
+export default memo(CampGround)
