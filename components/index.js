@@ -5,5 +5,6 @@ import Posts from './Posts'
 import Login from './LogIn'
 import SignUp from './SignUp'
 import ProtectedRoute from './ProtectedRoute'
+import Spinner from './Spinner'
 
-export { Button, Navbar, Banner, Posts, Login, SignUp, ProtectedRoute }
+export { Spinner, Button, Navbar, Banner, Posts, Login, SignUp, ProtectedRoute }

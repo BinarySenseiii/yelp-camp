@@ -1,6 +1,7 @@
 import React from 'react'
-import { useAuthContext } from '../context/UserContext'
 import router from 'next/router'
+import { Spinner } from './Spinner'
+import { useAuthContext } from '../context/UserContext'
 
 export default function ProtectedRoute(Component) {
    return function WithProtected(props) {
@@ -8,7 +9,7 @@ export default function ProtectedRoute(Component) {
 
       if (!user) {
          router.replace('/login')
-         return <h1>Redirecting please wait.. </h1>
+         return <Spinner />
       }
 
       return <Component user={user} {...props} />

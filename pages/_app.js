@@ -4,6 +4,8 @@ import Router from 'next/router'
 import ProgressBar from '@badrap/bar-of-progress'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { ReactQueryDevtools } from 'react-query/devtools'
+
+// Context
 import UserProvider from '../context/UserContext'
 
 // toast

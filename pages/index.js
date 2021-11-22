@@ -19,7 +19,6 @@ const Home = () => {
       },
    })
 
-   console.log(src)
    return (
       <React.Fragment>
          <Head>
