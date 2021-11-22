@@ -1,12 +1,31 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import toast from 'react-hot-toast'
 
+// firebase
+import { useAuthSignOut } from '@react-query-firebase/auth'
+import { auth } from '../firebase/config'
+
+// auth Context
+import { useAuthContext } from '../context/UserContext'
+
+// components
 import Sidebar from './Sidebar'
 import Button from './Button'
 
 const Navbar = () => {
+   const { user } = useAuthContext()
+   const mutation = useAuthSignOut(auth)
    const [isOpen, setIsOpen] = React.useState(false)
+
+   const SignOutHander = async () => {
+      try {
+         await mutation.mutate()
+      } catch (err) {
+         toast.error(err.message)
+      }
+   }
 
    return (
       <nav className="flex h-[100px] relative items-center justify-between container mx-auto">
@@ -45,23 +64,28 @@ const Navbar = () => {
          </div>
          <Sidebar isOpen={isOpen} />
          <div className="hidden md:flex items-center space-x-7">
-            <Link href="/login">
-               <a className="cursor-pointer ml-6 text-lg font-medium text-gray-500 hover:text-gray-900 font-headings">
-                  Login
-               </a>
-            </Link>
-            <Button text="Create an account" path="/signup" />
+            {user ? (
+               <button>
+                  <a
+                     onClick={SignOutHander}
+                     className="cursor-pointer ml-6 text-lg font-light text-gray-500 hover:text-gray-900 font-headings"
+                  >
+                     Logout
+                  </a>
+               </button>
+            ) : (
+               <>
+                  <Link href="/login">
+                     <a className="cursor-pointer ml-6 text-lg font-medium text-gray-500 hover:text-gray-900 font-headings">
+                        Login
+                     </a>
+                  </Link>
+                  <Button text="Create an account" path="/signup" />
+               </>
+            )}
          </div>
       </nav>
    )
 }
 
 export default Navbar
-
-// {
-//    /* <Link href="/">
-//       <a className="cursor-pointer ml-6 text-lg font-light text-gray-500 hover:text-gray-900 font-headings">
-//           Logout
-//         </a>
-//     </Link> */
-// }

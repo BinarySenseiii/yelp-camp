@@ -32,13 +32,13 @@ function MyApp({ Component, pageProps }) {
    }, [])
 
    return (
-      <UserProvider>
-         <QueryClientProvider client={queryClient}>
+      <QueryClientProvider client={queryClient}>
+         <UserProvider>
             <Component {...pageProps} />
             <Toaster />
             <ReactQueryDevtools initialIsOpen={false} />
-         </QueryClientProvider>
-      </UserProvider>
+         </UserProvider>
+      </QueryClientProvider>
    )
 }
 

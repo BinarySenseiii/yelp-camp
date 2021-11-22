@@ -1,13 +1,47 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
+import Router from 'next/router'
+
+import toast from 'react-hot-toast'
+
+import { auth } from '../firebase/config'
+import { useAuthSignInWithEmailAndPassword } from '@react-query-firebase/auth'
 
 const LoginIn = () => {
+   const mutation = useAuthSignInWithEmailAndPassword(auth)
+   const [input, setInput] = useState({
+      email: '',
+      password: '',
+   })
+
+   const onChangeHander = (e) => {
+      setInput((oldValues) => ({
+         ...oldValues,
+         [e.target.name]: e.target.value,
+      }))
+   }
+
+   const SignInHandler = async (event) => {
+      event.preventDefault()
+      const { email, password } = input
+
+      try {
+         await mutation.mutate({
+            email,
+            password,
+         })
+         Router.replace('/campground')
+      } catch (err) {
+         toast.error(err.message)
+      }
+   }
+
    return (
       <div className="mt-14">
          <h1 className="text-2xl md:text-3xl font-[600]">
             Start Exploring camps from all <br /> around the world.
          </h1>
-         <form className="mt-10">
+         <form className="mt-10" onSubmit={SignInHandler}>
             <div className="flex flex-col font-headings">
                <label htmlFor="email" className="text-lg text-gray-700">
                   Email
@@ -17,6 +51,9 @@ const LoginIn = () => {
                   id="email"
                   type="text"
                   placeholder="test@test.com"
+                  name="email"
+                  value={input.email}
+                  onChange={onChangeHander}
                />
             </div>
             <div className="flex flex-col font-headings mt-6">
@@ -28,13 +65,16 @@ const LoginIn = () => {
                   id="pass"
                   type="text"
                   placeholder="Enter your Password"
+                  name="password"
+                  value={input.password}
+                  onChange={onChangeHander}
                />
             </div>
             <button
                type="submit"
                className="bg-black w-full mt-6 font-headings py-3 px-5 hover:bg-gray-800 transition text-white rounded-md cursor-pointer"
             >
-               Login
+               {mutation.isLoading ? 'logging ..' : ' Login'}
             </button>
             <div className="font-headings mt-3 space-x-3">
                <span>Not a user yer?</span>

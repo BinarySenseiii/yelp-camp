@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar } from '../../components'
+import { Navbar, ProtectedRoute } from '../../components'
 
 const NewCampPage = () => {
    return (
@@ -66,4 +66,4 @@ const NewCampPage = () => {
    )
 }
 
-export default NewCampPage
+export default ProtectedRoute(NewCampPage)

@@ -18,7 +18,7 @@ const Card = ({ id, title, url, text }) => {
          </div>
          <h1 className="text-xl font-bold mt-5 ">{title}</h1>
          <p className="font-headings">{text}</p>
-         <Link href={`/campground/${id}`}>
+         <Link href={`/campground/${id}`} passHref>
             <a className="border-2 mt-4 w-full block text-center py-2 transition-all duration-[0.3s] ease-out rounded-md hover:text-white hover:bg-black font-headings">
                View Campground
             </a>

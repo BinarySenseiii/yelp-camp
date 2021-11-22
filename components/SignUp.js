@@ -69,6 +69,7 @@ const SignUp = () => {
                   id="email"
                   name="email"
                   type="text"
+                  value={input.email}
                   placeholder="test@test.com"
                   onChange={onChangeHander}
                />
@@ -82,6 +83,7 @@ const SignUp = () => {
                   id="pass"
                   type="text"
                   name="password"
+                  value={input.password}
                   placeholder="Enter your Password"
                   onChange={onChangeHander}
                />

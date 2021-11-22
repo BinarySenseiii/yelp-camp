@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navbar } from '../../components'
+import { Navbar, ProtectedRoute } from '../../components'
 
 const Comment = () => {
    return (
@@ -31,4 +31,4 @@ const Comment = () => {
    )
 }
 
-export default Comment
+export default ProtectedRoute(Comment)
