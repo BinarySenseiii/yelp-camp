@@ -37,7 +37,7 @@ const SignUp = () => {
          )
 
          if (userCrediential) {
-            toast.loading("be patience, we're doing our best", {
+            toast.loading("be patience, we're creating your account", {
                duration: 2000,
             })
             setTimeout(() => Router.push('/campground'), 3000)
@@ -74,7 +74,7 @@ const SignUp = () => {
                <input
                   className="mt-2 w-full px-4 h-[50px] bg-gray-200"
                   id="pass"
-                  type="text"
+                  type="password"
                   name="password"
                   value={input.password}
                   placeholder="Enter your Password"

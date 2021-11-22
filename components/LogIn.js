@@ -66,7 +66,7 @@ const LoginIn = () => {
                <input
                   className="mt-2 w-full px-4 h-[50px] bg-gray-200"
                   id="pass"
-                  type="text"
+                  type="password"
                   placeholder="Enter your Password"
                   name="password"
                   value={input.password}
