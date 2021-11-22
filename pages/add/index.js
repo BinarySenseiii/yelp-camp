@@ -1,7 +1,18 @@
-import React from 'react'
-import { Navbar, ProtectedRoute } from '../../components'
+import React, { useEffect } from 'react'
+import { Navbar } from '../../components'
+import { useAuthContext } from '../../context/UserContext'
+import Router from 'next/router'
 
 const NewCampPage = () => {
+   const { user } = useAuthContext()
+
+   useEffect(() => {
+      if (!user) {
+         Router.replace('/login')
+         return <h1 className="text-4xl m-5">Redirecting.. </h1>
+      }
+   }, [])
+
    return (
       <div className="container mx-auto px-8">
          <Navbar />
@@ -66,4 +77,4 @@ const NewCampPage = () => {
    )
 }
 
-export default ProtectedRoute(NewCampPage)
+export default NewCampPage
