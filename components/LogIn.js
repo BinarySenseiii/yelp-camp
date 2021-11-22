@@ -30,7 +30,10 @@ const LoginIn = () => {
             email,
             password,
          })
-         Router.replace('/campground')
+         toast.loading('Redirecting.. please wait', {
+            duration: 3000,
+         })
+         setTimeout(() => Router.push('/campground'), 3000)
       } catch (err) {
          toast.error(err.message)
       }

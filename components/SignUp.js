@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import toast from 'react-hot-toast'
-import { uuid } from '../helpers'
 import Router from 'next/router'
 
 // firebase
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { doc, setDoc } from 'firebase/firestore'
-import { auth, db } from '../firebase/config'
+import { auth } from '../firebase/config'
 
 const SignUp = () => {
    const [input, setInput] = useState({
@@ -39,15 +37,10 @@ const SignUp = () => {
          )
 
          if (userCrediential) {
-            const campRef = await doc(db, 'camps', userCrediential.user.uid)
-            await setDoc(campRef, {
-               id: uuid(),
-               name: '',
-               text: '',
-               image: '',
-               timeStamp: userCrediential.user.metadata.creationTime,
+            toast.loading("be patience, we're doing our best", {
+               duration: 2000,
             })
-            Router.replace('/campground')
+            setTimeout(() => Router.push('/campground'), 3000)
          }
       } catch (err) {
          toast.error(err.message)
