@@ -32,7 +32,11 @@ const CampGround = () => {
          </Head>
          <Navbar />
          <Banner camps={results} setSearchtext={setSearchtext} />
-         <Posts camps={results} searchText={searchText} />
+         {results.length > 0 ? (
+            <Posts camps={results} searchText={searchText} />
+         ) : (
+            <h1 className="text-2xl mt-5">Camps not found</h1>
+         )}
       </div>
    )
 }

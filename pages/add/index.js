@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import Router from 'next/router'
 import { Navbar } from '../../components'
-import { useAuthContext } from '../../context/UserContext'
 import toast from 'react-hot-toast'
 
-import { useFirestoreCollectionMutation } from '@react-query-firebase/firestore'
-import { collection } from 'firebase/firestore'
+import { uuid } from '../../helpers'
+
+// authContext
+import { useAuthContext } from '../../context/UserContext'
+
+import { doc, setDoc } from 'firebase/firestore'
 import { db } from '../../firebase/config'
 
+const randomID = uuid()
+
 const NewCampPage = () => {
-   const ref = collection(db, 'camps')
-   const mutation = useFirestoreCollectionMutation(ref)
+   const { user } = useAuthContext()
 
    const [input, setInput] = useState({
       name: '',
@@ -18,7 +22,6 @@ const NewCampPage = () => {
       image: '',
       description: '',
    })
-   const { user } = useAuthContext()
 
    useEffect(() => {
       if (!user) {
@@ -34,7 +37,7 @@ const NewCampPage = () => {
       }))
    }
 
-   const submitCampHandler = (e) => {
+   const submitCampHandler = async (e) => {
       e.preventDefault()
       const { name, price, image, description } = input
 
@@ -42,11 +45,17 @@ const NewCampPage = () => {
          return toast.error('input fields required')
       }
 
-      mutation.mutate({
+      // Add a new document in collection "cities"
+      await setDoc(doc(db, 'camps', randomID), {
          name,
          price: `$ ${price}`,
          image,
          description,
+         email: user.email,
+      })
+
+      await setDoc(doc(db, 'comments', randomID), {
+         feedbacks: [],
       })
 
       toast.loading("please wait we're adding your camp..", {

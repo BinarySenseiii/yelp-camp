@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 
 import { Navbar, Button } from '../../components'
-import { comments } from '../../data'
 
 import { db } from '../../firebase/config'
 import { getDoc, doc } from 'firebase/firestore'
@@ -11,18 +10,25 @@ import { getDoc, doc } from 'firebase/firestore'
 const CampDetail = () => {
    const { query } = useRouter()
    const [camp, setCamp] = React.useState(null)
+   const [comments, setComments] = React.useState(null)
 
    React.useEffect(() => {
-      const ref = doc(db, 'camps', query.slug)
-      getDoc(ref).then((doc) => {
+      getDoc(doc(db, 'camps', query.slug)).then((doc) => {
          setCamp({
+            id: doc.id,
+            ...doc.data(),
+         })
+      })
+
+      getDoc(doc(db, 'comments', query.slug)).then((doc) => {
+         setComments({
             id: doc.id,
             ...doc.data(),
          })
       })
    }, [])
 
-   if (!camp) {
+   if (!camp || !comments) {
       return <p>loading...</p>
    }
 
@@ -58,23 +64,33 @@ const CampDetail = () => {
                   <p className="mt-5 font-headings">{camp.description}</p>
                   <p className="mt-3">
                      Submitted by
-                     <i className="font-bold ml-1">anonymous</i>
+                     <i className="font-bold ml-1">{camp.email}</i>
                   </p>
                </div>
 
                {/* Comments */}
                <div className="border-2 border-gray-100 px-6 py-4 my-6">
-                  {comments.map(({ id, name, timeStamp, text }) => (
-                     <div key={id} className="border-b-2 pb-5">
-                        <div className="flex mt-5 items-center justify-between">
-                           <h1 className="font-bold text-xl">{name}</h1>
-                           <span className="font-headings font-normal">
-                              {timeStamp}
-                           </span>
-                        </div>
-                        <p className="mt-5 font-headings">{text}</p>
+                  {comments.feedbacks.length > 0 ? (
+                     <div>
+                        {comments.feedbacks.map(
+                           ({ id, name, timeStamp, text }) => (
+                              <div key={id} className="border-b-2 pb-5">
+                                 <div className="flex mt-5 items-center justify-between">
+                                    <h1 className="font-bold text-xl">
+                                       {name}
+                                    </h1>
+                                    <span className="font-headings font-normal">
+                                       {timeStamp}
+                                    </span>
+                                 </div>
+                                 <p className="mt-5 font-headings">{text}</p>
+                              </div>
+                           )
+                        )}
                      </div>
-                  ))}
+                  ) : (
+                     <h1 className="text-2xl underline">No Feedback found</h1>
+                  )}
                   <div className="text-right mt-12 mb-4">
                      <Button icon text="Leave a Review" path="/comment" />
                   </div>
