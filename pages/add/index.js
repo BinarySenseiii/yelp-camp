@@ -114,6 +114,19 @@ const NewCampPage = () => {
                      onChange={onChangeHandler}
                      placeholder="www.thepinnoytraveler.com/2019/01/mt-ulap.diy-dayhike.html"
                   />
+                  <p className="text-red-500 text-xs mt-4">
+                     <strong>Note:-</strong> only{' '}
+                     <a
+                        href="https://cloudinary.com/"
+                        target="_blank"
+                        rel="noreferrer"
+                        className="underline"
+                        title="images and videos upload storage, optimization and cdn"
+                     >
+                        cloudinary
+                     </a>{' '}
+                     images work otherwise you will get an error{' '}
+                  </p>
                </div>
                <div className="flex flex-col font-headings mt-6">
                   <label htmlFor="desc" className="text-lg text-gray-700">
