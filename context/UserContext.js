@@ -12,6 +12,11 @@ const reducer = (state, action) => {
             ...state,
             ...action.payload,
          }
+      case 'CAMP_ID':
+         return {
+            ...state,
+            campId: action.payload,
+         }
       default:
          return state
    }
@@ -22,12 +27,14 @@ export default function UserProvider({ children }) {
    const [state, dispatch] = useReducer(reducer, {
       user: null,
       isAuthReady: false,
+      campId: null,
    })
 
    useEffect(() => {
       dispatch({
          type: 'INIT_USER',
          payload: {
+            ...state,
             user: user.data,
             isAuthReady: user.isLoading,
          },

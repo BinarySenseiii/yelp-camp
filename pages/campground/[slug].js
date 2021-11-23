@@ -6,11 +6,13 @@ import { Navbar, Button } from '../../components'
 
 import { db } from '../../firebase/config'
 import { getDoc, doc } from 'firebase/firestore'
+import { useAuthContext } from '../../context/UserContext'
 
 const CampDetail = () => {
    const { query } = useRouter()
    const [camp, setCamp] = React.useState(null)
    const [comments, setComments] = React.useState(null)
+   const { dispatch } = useAuthContext()
 
    React.useEffect(() => {
       getDoc(doc(db, 'camps', query.slug)).then((doc) => {
@@ -26,6 +28,8 @@ const CampDetail = () => {
             ...doc.data(),
          })
       })
+
+      dispatch({ type: 'CAMP_ID', payload: query.slug })
    }, [])
 
    if (!camp || !comments) {
@@ -72,21 +76,21 @@ const CampDetail = () => {
                <div className="border-2 border-gray-100 px-6 py-4 my-6">
                   {comments.feedbacks.length > 0 ? (
                      <div>
-                        {comments.feedbacks.map(
-                           ({ id, name, timeStamp, text }) => (
-                              <div key={id} className="border-b-2 pb-5">
-                                 <div className="flex mt-5 items-center justify-between">
-                                    <h1 className="font-bold text-xl">
-                                       {name}
-                                    </h1>
-                                    <span className="font-headings font-normal">
+                        {comments.feedbacks.map(({ id, name, text }) => (
+                           <div key={id} className="border-b-2 pb-5">
+                              <div className="flex mt-5 items-center justify-between">
+                                 <h1 className="font-bold text-sm underline">
+                                    {name}
+                                 </h1>
+                                 {/* <span className="font-headings font-normal">
                                        {timeStamp}
-                                    </span>
-                                 </div>
-                                 <p className="mt-5 font-headings">{text}</p>
+                                    </span> */}
                               </div>
-                           )
-                        )}
+                              <p className="mt-5 font-headings text-sm">
+                                 {text}
+                              </p>
+                           </div>
+                        ))}
                      </div>
                   ) : (
                      <h1 className="text-2xl underline">No Feedback found</h1>
