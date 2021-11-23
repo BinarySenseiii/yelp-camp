@@ -7,12 +7,10 @@ import { comments } from '../../data'
 
 import { db } from '../../firebase/config'
 import { getDoc, doc } from 'firebase/firestore'
-import { useAuthContext } from '../../context/UserContext'
 
 const CampDetail = () => {
    const { query } = useRouter()
    const [camp, setCamp] = React.useState(null)
-   const { user } = useAuthContext()
 
    React.useEffect(() => {
       const ref = doc(db, 'camps', query.slug)
@@ -60,7 +58,7 @@ const CampDetail = () => {
                   <p className="mt-5 font-headings">{camp.description}</p>
                   <p className="mt-3">
                      Submitted by
-                     <i className="font-bold ml-1">{user.email}</i>
+                     <i className="font-bold ml-1">anonymous</i>
                   </p>
                </div>
 
