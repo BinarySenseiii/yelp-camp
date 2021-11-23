@@ -49,7 +49,9 @@ const NewCampPage = () => {
       await setDoc(doc(db, 'camps', randomID), {
          name,
          price: `$ ${price}`,
-         image,
+         image: input.image.includes('cloudinary')
+            ? image
+            : 'https://res.cloudinary.com/deweqyyjt/image/upload/v1637688937/wallpaperflare.com_wallpaper_mlxz0m.jpg',
          description,
          email: user.email,
       })
@@ -125,7 +127,7 @@ const NewCampPage = () => {
                      >
                         cloudinary
                      </a>{' '}
-                     images work otherwise you will get an error{' '}
+                     images work otherwise your picture will not appear{' '}
                   </p>
                </div>
                <div className="flex flex-col font-headings mt-6">
