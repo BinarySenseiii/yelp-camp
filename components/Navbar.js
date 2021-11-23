@@ -1,10 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import toast from 'react-hot-toast'
+import Router from 'next/router'
 
 // firebase
-import { useAuthSignOut } from '@react-query-firebase/auth'
+import { signOut } from 'firebase/auth'
 import { auth } from '../firebase/config'
 
 // auth Context
@@ -16,15 +16,12 @@ import Button from './Button'
 
 const Navbar = () => {
    const { user } = useAuthContext()
-   const mutation = useAuthSignOut(auth)
+
    const [isOpen, setIsOpen] = React.useState(false)
 
-   const SignOutHander = async () => {
-      try {
-         await mutation.mutate()
-      } catch (err) {
-         toast.error(err.message)
-      }
+   const signOutHandler = async () => {
+      await signOut(auth)
+      Router.push('/')
    }
 
    return (
@@ -67,7 +64,7 @@ const Navbar = () => {
             {user ? (
                <button>
                   <a
-                     onClick={SignOutHander}
+                     onClick={signOutHandler}
                      className="cursor-pointer ml-6 text-lg font-light text-gray-500 hover:text-gray-900 font-headings"
                   >
                      Logout
