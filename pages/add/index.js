@@ -1,9 +1,23 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import Router from 'next/router'
 import { Navbar } from '../../components'
 import { useAuthContext } from '../../context/UserContext'
-import Router from 'next/router'
+import toast from 'react-hot-toast'
+
+import { useFirestoreCollectionMutation } from '@react-query-firebase/firestore'
+import { collection } from 'firebase/firestore'
+import { db } from '../../firebase/config'
 
 const NewCampPage = () => {
+   const ref = collection(db, 'camps')
+   const mutation = useFirestoreCollectionMutation(ref)
+
+   const [input, setInput] = useState({
+      name: '',
+      price: '',
+      image: '',
+      description: '',
+   })
    const { user } = useAuthContext()
 
    useEffect(() => {
@@ -13,11 +27,40 @@ const NewCampPage = () => {
       }
    }, [])
 
+   const onChangeHandler = (e) => {
+      setInput((old) => ({
+         ...old,
+         [e.target.name]: e.target.value,
+      }))
+   }
+
+   const submitCampHandler = (e) => {
+      e.preventDefault()
+      const { name, price, image, description } = input
+
+      if (!name || !price || !image || !description) {
+         return toast.error('input fields required')
+      }
+
+      mutation.mutate({
+         name,
+         price: `$ ${price}`,
+         image,
+         description,
+      })
+
+      toast.loading("please wait we're adding your camp..", {
+         duration: 2000,
+      })
+
+      setTimeout(() => Router.push('/campground'), 3000)
+   }
+
    return (
       <div className="container mx-auto px-8">
          <Navbar />
          <div className="w-full md:w-[568px] mx-auto">
-            <form className="my-5">
+            <form className="my-5" onSubmit={submitCampHandler}>
                <h1 className="font-bold text-2xl md:text-3xl">
                   Add New Campground
                </h1>
@@ -29,6 +72,9 @@ const NewCampPage = () => {
                      className="mt-2 text-sm w-full px-4 h-[50px] bg-gray-100"
                      id="campName"
                      type="text"
+                     value={input.name}
+                     name="name"
+                     onChange={onChangeHandler}
                      placeholder="Seven Sisters Waterfall"
                   />
                </div>
@@ -40,6 +86,9 @@ const NewCampPage = () => {
                      className="mt-2 text-sm w-full px-4 h-[50px] bg-gray-100"
                      id="price"
                      type="text"
+                     value={input.price}
+                     name="price"
+                     onChange={onChangeHandler}
                      placeholder="$149"
                   />
                </div>
@@ -51,6 +100,9 @@ const NewCampPage = () => {
                      className="mt-2 text-sm w-full px-4 h-[50px] bg-gray-100"
                      id="image"
                      type="text"
+                     value={input.image}
+                     name="image"
+                     onChange={onChangeHandler}
                      placeholder="www.thepinnoytraveler.com/2019/01/mt-ulap.diy-dayhike.html"
                   />
                </div>
@@ -62,6 +114,9 @@ const NewCampPage = () => {
                      className="mt-2 text-sm w-full px-4 h-[170px] py-3 bg-gray-100"
                      id="desc"
                      type="text"
+                     value={input.description}
+                     name="description"
+                     onChange={onChangeHandler}
                      placeholder="The Seven Sisters is the 39th tallest waterfall in Norway. The 410-metre tall waterfall consists of seven has a free fall that measures 250 metres. The waterfall is located along the Geirangerforden in Stranda Municipality in More og Romsdal country Norway."
                   />
                </div>
