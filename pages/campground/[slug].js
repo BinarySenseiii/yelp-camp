@@ -8,9 +8,20 @@ const CampDetail = () => {
    return (
       <div className="container mx-auto px-8 mb-12">
          <Navbar />
-         <div className="grid grid-cols-3 mt-6">
-            {/* Maps */}
-            <div></div>
+         <div className="md:grid grid-cols-3 gap-4 mt-6">
+            <div className="mt-6">
+               <iframe
+                  width="100%"
+                  height="600"
+                  frameBorder="0"
+                  scrolling="no"
+                  marginHeight="0"
+                  marginWidth="0"
+                  src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20Grafton%20Street,%20Dublin,%20Ireland+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=ebed"
+               >
+                  <a href="https://www.gps.ie/car-satnav-gps/">car gps</a>
+               </iframe>
+            </div>
             <div className="col-span-2 mt-6">
                <div className="border-2 border-gray-100 px-6 py-4">
                   <div className="relative h-[350px] w-full">
